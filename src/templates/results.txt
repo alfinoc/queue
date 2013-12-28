@@ -1,0 +1,16 @@
+{
+  "results": [
+    {% for r in results %}
+    {
+      "service": "{{ r.service }}",
+      "title": "{{ r.title }}",
+      "stream_url": "{{ r.embed_url }}",
+      "duration": "{{ r.duration }}",
+      "artwork_url": "{{ r.artwork_url }}",
+      "sc_id": "{{ r.sc_id }}",
+      "permalink_url": "{{ r.permalink_url }}"
+    }
+    {% if not loop.last %} , {% endif %}
+    {% endfor %}
+  ]
+}

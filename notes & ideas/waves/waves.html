@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Waves!</title>
+	<script type="text/javascript" src="paperjs/dist/paper.js"></script>
+	<script type="text/javascript" src="points.js"></script>
+	<style>body {margin: 0px;}</style>
+	<script type="text/paperscript" canvas="datcanvas">
+
+var wavy = new waveform();
+
+var path = new Path({
+	segments: wavy.getSegments(),
+	strokeColor: 'black',
+});
+path.smooth();
+
+function onFrame(event) {
+	for (var i = 0; i < path.segments.length; i++) {
+		var segment = path.segments[i];
+
+		// A cylic value between -1 and 1
+		var sinus = Math.sin(event.time * 3 + i);
+		
+		// Change the y position of the segment point:
+		segment.point.y -= 400
+		segment.point.y *= .999 * segment.point.y;
+		segment.point.y += 400;
+	}
+	path.smooth();
+}
+// Select the path, so we can see its handles:
+//path.fullySelected = true;
+
+	</script>
+</head>
+<body>
+<canvas id="datcanvas" resize></canvas>
+</body>
+</html>

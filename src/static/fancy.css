@@ -1,0 +1,77 @@
+#rotatorwrap {
+	position: relative;
+	margin: auto;
+}
+
+#rotatorwrap, #spokes, #rotator {
+	width: 60px;
+	height: 60px;
+}
+
+#rotator {
+	margin: 1px;
+}
+
+#rotatorwrap > div {
+	position: absolute;
+}
+
+#rotator, #spokes {
+	position: absolute;
+}
+
+#rotator {
+	display: none;
+}
+
+#rotator {
+	-webkit-animation-name:             rotate; 
+	-webkit-animation-duration:         4s;
+	-webkit-animation-iteration-count:  infinite;
+	-webkit-animation-timing-function: linear;
+}
+
+#spokes {
+	-webkit-animation-name:             scale; 
+	-webkit-animation-duration:         1s;
+	-webkit-animation-iteration-count:  infinite;
+	-webkit-animation-timing-function: ease;
+}
+
+.spoke {
+	position: absolute;
+	border-left: 2px solid gray;
+	margin-left: 29px;
+	border-radius: 10px;
+	width: 0px;
+	height: 100%;
+}
+
+.two {   -webkit-transform: rotate(30deg); }
+.three { -webkit-transform: rotate(60deg); }
+.four {  -webkit-transform: rotate(90deg); }
+.five {  -webkit-transform: rotate(120deg); }
+.six {   -webkit-transform: rotate(150deg); }
+
+#settings:hover {
+	-webkit-animation-name:             rotate; 
+	-webkit-animation-duration:         4s;
+	-webkit-animation-iteration-count:  infinite;
+	-webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes rotate {
+	from { -webkit-transform: rotate(0deg); }
+	to {   -webkit-transform: rotate(359deg); }
+}
+
+@-webkit-keyframes scale {
+	0% {
+		-webkit-transform: scale(1, 1);
+		-webkit-transform-origin: 50% 50%;
+	}
+	50% { 
+		-webkit-transform: scale(1.5, 1.5);
+		-webkit-transform-origin: 50% 50%;
+	}
+}

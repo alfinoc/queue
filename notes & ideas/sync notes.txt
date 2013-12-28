@@ -1,0 +1,41 @@
+Kinds of clients:
+	ADMIN
+	PLAYER
+	SPECTATOR
+	MODIFIER
+
+queue_id -> list of song ids
+
+song_id -> song info object
+
+
+
+FOR PLAYER CLIENT:
+
+updating would involve:
+	get a new copy of the queue list
+	if you don't recognize any of the ids
+		request their contents
+		reorganize (complicated)
+	otherwise
+		go ahead and move around
+	if current
+
+
+queue destruction would involve
+	request that queue_id be destroyed
+	which would destroy all entries for song_ids too
+
+SERVER REQUESTS
+
+init_sync = { queue object and contents }
+	result: creates a new queue_id mapping to a list of song_ids, inserts each of these song_ids, creates new password mapping
+	response: spectator password
+
+get_queue = _, password = spectator password
+	result: if password exists, just gets the contents
+	response: the contents of the queue (at this point, client should save the password)
+	error: incorrect password (at this point, client should try a new one)
+
+set_queue = { queue object and contents }, password = modifier password
+	reorganizes queue_id value and sets song_id key-values for newly added songs

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Circles!</title>
+	<script type="text/javascript" src="paperjs/dist/paper.js"></script>
+	<style>body {margin: 0px;}</style>
+	<script type="text/paperscript" canvas="datcanvas">
+
+var sourcePoint = new Point(0, 0);
+var circles = [];
+var interval;
+var speed_factor = 1;
+
+function onFrame(event) {
+	if (circles) {
+		for (var i = 0; i < circles.length; i++) {
+			var circle = circles[i];
+			if (circle.bounds.width < document.width * 2.5) {
+				circle.scale(1 + event.delta * speed_factor);
+			} else {
+				circle.remove();
+				circles.shift();
+			}
+		}
+	}
+}
+
+function createCircle() {
+	circle = new Path.Circle(sourcePoint, 5);
+	circle.strokeColor = 'black';
+	circle.strokeWidth = 2;
+	circles.push(circle);
+}
+
+function repeatCircle(freq) {
+	clearInterval(interval);
+	interval = setInterval(createCircle, freq);
+}
+
+function onMouseDown(event) {
+	sourcePoint = event.point;
+	//repeatCircle(500);
+	createCircle();
+}
+
+	</script>
+</head>
+<body>
+<canvas id="datcanvas" resize></canvas>
+</body>
+</html>
